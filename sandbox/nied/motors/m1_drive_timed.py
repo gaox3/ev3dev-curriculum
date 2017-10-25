@@ -100,6 +100,11 @@ def main():
         left_motor.stop()
         right_motor.stop()
 
+        if speed == 0:
+            time_s = 0
+        if distance == 0:
+            time_s = 0
+
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()
 
