@@ -94,8 +94,8 @@ def main():
     while time_s != 0:
         speed = int(input("Enter a speed (0 to 900 dps):"))
         distance = int(input("Distance to travel (inches):"))
-        left_motor.run_forever(speed)
-        right_motor.run_forever(speed)
+        left_motor.run_forever(speed_sp = speed)
+        right_motor.run_forever(speed_sp = speed)
         time.sleep(distance/(0.0108 * speed))
         left_motor.stop()
         right_motor.stop()
