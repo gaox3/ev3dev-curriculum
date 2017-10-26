@@ -65,15 +65,15 @@ Authors: David Fisher and Ding Nie.
 #    print("  Timed Driving")
 #    print("--------------------------------------------")
 #    ev3.Sound.speak("Timed Driving").wait()
-#!/usr/bin/env python3
+# !/usr/bin/env python3
+
+import ev3dev.ev3 as ev3
+import time
 """
 This demo lets you see how to use an input prompt to test different drive speeds.
 
 Author: David Fisher.
 """
-
-import ev3dev.ev3 as ev3
-import time
 
 
 def main():
@@ -98,12 +98,11 @@ def main():
         distance = int(input("Distance to travel (inches):"))
         if distance == 0:
             break
-        left_motor.run_forever(speed_sp = speed)
-        right_motor.run_forever(speed_sp = speed)
+        left_motor.run_forever(speed_sp=speed)
+        right_motor.run_forever(speed_sp=speed)
         time.sleep(distance/(0.0108 * speed))
         left_motor.stop()
         right_motor.stop()
-
 
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()

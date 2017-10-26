@@ -26,14 +26,14 @@ def main():
     robot = robo.Snatch3r()
 
     while True:
+        turn_degrees = int(input("Turn degrees: "))
+        if turn_degrees == 0:
+            break
         speed_deg_per_second = int(input("Speed (0 to 900 dps): "))
         if speed_deg_per_second == 0:
             break
-        inches_target = int(input("Distance (inches): "))
-        if inches_target == 0:
-            break
 
-        robot.drive_inches(inches_target, speed_deg_per_second)
+        robot.turn_degrees(turn_degrees, speed_deg_per_second)
         ev3.Sound.beep().wait()  # Fun little beep
 
     print("Goodbye!")
@@ -61,7 +61,7 @@ main()
 #     Use the run_to_rel_pos, .wait_while(ev3.Motor.STATE_RUNNING) pattern to implement your work (not timed driving)
 #   You will have to experimentally determine the formula for accurate position_sp turn amounts.
 
-# TODO: 4. Individually implement the code here to use your turn_degrees library method.
+# DONE: 4. Individually implement the code here to use your turn_degrees library method.
 #   Modify the code to ask the user how many degrees they would like to turn
 #   Ask the user what speed they would like to use for the turn (0 to 900 degrees per second).
 #   Beep after the turn is complete via a beep in this module (tests to make sure the library is blocking)

@@ -10,7 +10,6 @@ Authors: David Fisher and Ding Nie.
 # DONE: 2. Copy the contents of your m1_drive_timed.py and paste that text into this file below these comments.
 #   If your program says and prints anything at the start change it to print and say "Drive using encoders"
 import ev3dev.ev3 as ev3
-import time
 
 
 def main():
@@ -34,8 +33,8 @@ def main():
         position = int(input("Relative position to travel (inches):"))
         if position == 0:
             break
-        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_BRAKE)
-        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_BRAKE)
+        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90, stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90, stop_action=ev3.Motor.STOP_ACTION_BRAKE)
         left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
@@ -43,10 +42,12 @@ def main():
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()
 
+
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
 main()
+
 
 # DONE: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
 #   ev3.Sound.beep().wait()
@@ -60,7 +61,7 @@ main()
 #       degrees_per_inch = 90
 #       motor_turns_needed_in_degrees = inches_target * degrees_per_inch
 #
-#   Delete your time.sleep and .stop commands as well a3s your speed equations to get time (we no longer care about time)
+# Delete your time.sleep and .stop commands as well a3s your speed equations to get time (we no longer care about time)
 #     and convert your run_forever method to use a run_to_rel_pos method with appropriate arguments.
 #   Your arguments to the run_to_rel_pos method should include the named arguments (notice time is not needed):
 #        -- position_sp
@@ -81,5 +82,3 @@ main()
 # DONE: 7. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
 #
 # Observations you should make, run_to_rel_pos is easier to use since it uses encoders that are independent of speed.
-
-
