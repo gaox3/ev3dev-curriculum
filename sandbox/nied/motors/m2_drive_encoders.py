@@ -26,7 +26,6 @@ def main():
     # Check that the motors are actually connected
     assert left_motor.connected
     assert right_motor.connected
-# hi
     time_s = 1  # Any value other than 0.
     while time_s != 0:
         speed = int(input("Enter a speed (0 to 900 dps):"))
@@ -43,6 +42,11 @@ def main():
 
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()
+
+    # ----------------------------------------------------------------------
+    # Calls  main  to start the ball rolling.
+    # ----------------------------------------------------------------------
+    main()
 
 # DONE: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
 #   ev3.Sound.beep().wait()

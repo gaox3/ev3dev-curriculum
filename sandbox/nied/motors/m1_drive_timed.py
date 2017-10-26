@@ -89,7 +89,7 @@ def main():
     # Check that the motors are actually connected
     assert left_motor.connected
     assert right_motor.connected
-# hi
+
     time_s = 1  # Any value other than 0.
     while time_s != 0:
         speed = int(input("Enter a speed (0 to 900 dps):"))
