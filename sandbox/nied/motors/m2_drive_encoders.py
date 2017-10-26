@@ -34,10 +34,10 @@ def main():
         position = int(input("Relative position to travel (inches):"))
         if position == 0:
             break
-        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position)
-        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position)
-        left_motor.wait_while(ev3.Motor.STOP_ACTION_COAST)
-        right_motor.wait_while(ev3.Motor.STOP_ACTION_COAST)
+        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90)
+        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90)
+        left_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
     print("Goodbye!")
@@ -60,14 +60,14 @@ main()
 #       degrees_per_inch = 90
 #       motor_turns_needed_in_degrees = inches_target * degrees_per_inch
 #
-#   Delete your time.sleep and .stop commands as well as your speed equations to get time (we no longer care about time)
+#   Delete your time.sleep and .stop commands as well a3s your speed equations to get time (we no longer care about time)
 #     and convert your run_forever method to use a run_to_rel_pos method with appropriate arguments.
 #   Your arguments to the run_to_rel_pos method should include the named arguments (notice time is not needed):
 #        -- position_sp
 #        -- speed_sp
 #        -- stop_action
 
-# TODO: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
+# DONE: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
 
 # TODO: 6. Formally test your work. When you think you have the problem complete run these tests:
 #   200 dps 24 inches (make sure it drives within 2 inches of the target distance)
