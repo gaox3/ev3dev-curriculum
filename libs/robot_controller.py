@@ -25,15 +25,16 @@ class Snatch3r(object):
         print("--------------------------------------------")
         print("  Drive using input")
         print("--------------------------------------------")
-        ev3.Sound.speak("Drive using input").wait()
         self.left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
         self.right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
-        assert self.left_motor.connected
-        assert self.right_motor.connected
-        self.time_s = 1
+
 
     def drive_inches(self):
-        while self.time_s != 0:
+        ev3.Sound.speak("Drive using input").wait()
+        assert self.left_motor.connected
+        assert self.right_motor.connected
+        time_s = 1
+        while time_s != 0:
             speed = int(input("Enter a speed (0 to 900 dps):"))
             if speed == 0:
                 break
