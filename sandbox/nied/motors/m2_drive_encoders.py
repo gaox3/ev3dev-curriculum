@@ -34,9 +34,9 @@ def main():
         position = int(input("Relative position to travel (inches):"))
         if position == 0:
             break
-        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_COAST)
+        left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_BRAKE)
+        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_BRAKE)
         left_motor.wait_while(ev3.Motor.STATE_RUNNING)
-        right_motor.run_to_rel_pos(speed_sp=speed, position_sp=position*90,stop_action= ev3.Motor.STOP_ACTION_COAST)
         right_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep().wait()
 
@@ -51,7 +51,7 @@ main()
 # DONE: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
 #   ev3.Sound.beep().wait()
 
-# TODO: 4. Instead of using the run_forever, time.sleep, stop pattern switch to using the run_to_rel_pos command.
+# DONE: 4. Instead of using the run_forever, time.sleep, stop pattern switch to using the run_to_rel_pos command.
 #   You will need to determine the position_sp value to pass into the run_to_rel_pos command as a named argument.
 #   Assume the diameter of the wheel is 1.3" (close enough).  A 1.3" diameter wheel results in approximately a 4"
 #     circumference, so 360 degrees = 4 inches of travel.
@@ -69,7 +69,7 @@ main()
 
 # DONE: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
 
-# TODO: 6. Formally test your work. When you think you have the problem complete run these tests:
+# DONE: 6. Formally test your work. When you think you have the problem complete run these tests:
 #   200 dps 24 inches (make sure it drives within 2 inches of the target distance)
 #   400 dps 24 inches (make sure it drives within 2 inches of the target distance)
 #   800 dps 24 inches (make sure it drives within 2 inches of the target distance)
@@ -78,7 +78,7 @@ main()
 #   400 dps -36 inches (make sure it drives within 3 inches of the target distance)
 # Add more tests as you see fit.  Ideally you should be +/- 10% of the target goal this time.
 
-# TODO: 7. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
+# DONE: 7. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
 #
 # Observations you should make, run_to_rel_pos is easier to use since it uses encoders that are independent of speed.
 
