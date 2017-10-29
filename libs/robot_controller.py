@@ -35,15 +35,15 @@ class Snatch3r(object):
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
-        if turn_speed_sp > 0:
-            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-degrees_to_turn,
+        if degrees_to_turn > 0:
+            self.left_motor.run_to_rel_pos(speed_sp=(-turn_speed_sp), position_sp=-5.2*degrees_to_turn,
                                            stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=degrees_to_turn,
+            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.2*degrees_to_turn,
                                             stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-        if turn_speed_sp < 0:
-            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=degrees_to_turn,
+        else:
+            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.2*degrees_to_turn,
                                            stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-degrees_to_turn,
+            self.right_motor.run_to_rel_pos(speed_sp=(-turn_speed_sp), position_sp=-5.2*degrees_to_turn,
                                             stop_action=ev3.Motor.STOP_ACTION_BRAKE)
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)

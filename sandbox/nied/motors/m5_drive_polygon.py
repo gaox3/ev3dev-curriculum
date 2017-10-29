@@ -36,9 +36,9 @@ def main():
 
         # DONE: 2. Individually implement the code here to use your drive_inches and turn_degrees library methods to
         # drive a polygon with the correct number of sides. (Hint: You will add 3 lines of code. What are they?).
-        for k in range(sides):
-            robot.drive_inches(edge_length_in*90, speed_deg_per_second)
-            robot.turn_degrees(180-turn_amount, speed_deg_per_second)
+        for _ in range(sides):
+            robot.drive_inches(edge_length_in, speed_deg_per_second)
+            robot.turn_degrees((180-turn_amount), speed_deg_per_second)
 
         # TODO: 3. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
         #   You are done with the Motors unit!
