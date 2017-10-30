@@ -8,7 +8,7 @@ Much like we did in gaox3 of the motors unit, later we will show you different (
 Authors: David Fisher and Xiang Gao.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-# TODO: 2. Have someone on your team run this program as is on the EV3 and make sure everyone understands the code.
+# DONE: 2. Have someone on your team run this program as is on the EV3 and make sure everyone understands the code.
 #   You will exit the program by pressing the back button on the EV3 brick (button just below the screen).
 #   The back button is already implemented to exit the program (as you can see in the code below).
 
@@ -70,6 +70,7 @@ def main():
         #   Optional: You can also comment out the code above that does the 6 second red, green, off pattern.  It was
         #     there just to provide you with code examples for using the LEDs.  It does not need to run anymore.
         #     Just make sure not to comment out too much. ;)
+
 
         # TODO: 4. Implement the down button to change the color of both LEDs.
         #   The first press to down should make both LEDs GREEN, the next press makes them RED, then AMBER, then off.
