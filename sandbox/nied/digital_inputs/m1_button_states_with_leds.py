@@ -75,11 +75,11 @@ def main():
             if btn.up:
                 print("up")
                 ev3.Leds.all_off()
-                time.sleep(1.0)
             elif btn.left:
                 print("left")
                 ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
                 ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+            time.sleep(2.0)
 
         # btn.on_left = lambda: print('left')
         # btn.on_right = lambda: print('right')
