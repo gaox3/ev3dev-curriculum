@@ -71,18 +71,19 @@ def main():
         #     there just to provide you with code examples for using the LEDs.  It does not need to run anymore.
         #     Just make sure not to comment out too much. ;)
         btn = ev3.Button()
-        while True:
-            if btn.up:
-                print("up")
-                ev3.Leds.all_off()
-            elif btn.left:
-                print("left")
-                ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
-                ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
-            time.sleep(2.0)
 
-        # btn.on_left = lambda: print('left')
-        # btn.on_right = lambda: print('right')
+        if btn.up:
+            print("up")
+            ev3.Leds.all_off()
+        elif btn.left:
+            print("left")
+            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+        elif btn.right:
+            print("right")
+            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+        time.sleep(.01)
 
         # TODO: 4. Implement the down button to change the color of both LEDs.
         #   The first press to down should make both LEDs GREEN, the next press makes them RED, then AMBER, then off.
