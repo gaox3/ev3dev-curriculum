@@ -80,7 +80,6 @@ def main():
     rc1.on_red_down = lambda state: handle_red_down_1(state, dc)
     rc1.on_blue_up = lambda state: handle_blue_up_1(state, dc)
     rc1.on_blue_down = lambda state: handle_blue_down_1(state, dc)
-    rc1.process()
 
     # DONE: 5. Create remote control objects for channels 2, 3, and 4. Add lambda callbacks for on_red_up to each one:
     #   Channel 2's .on_red_up should call handle_red_up_2 (that exist already) with state and dc as parameters
@@ -89,17 +88,14 @@ def main():
     rc2 = ev3.RemoteControl(channel=2)
     assert rc2.connected
     rc2.on_red_up = lambda state: handle_red_up_2(state, dc)
-    rc2.process()
 
     rc3 = ev3.RemoteControl(channel=3)
     assert rc3.connected
     rc3.on_red_up = lambda state: handle_red_up_3(state, dc)
-    rc3.process()
 
     rc4 = ev3.RemoteControl(channel=4)
     assert rc4.connected
     rc4.on_red_up = lambda state: handle_red_up_4(state, dc)
-    rc4.process()
 
     # Buttons on EV3
     btn = ev3.Button()
@@ -117,8 +113,11 @@ def main():
         # Observations you should make, IR buttons work exactly like buttons on the EV3.
         #   The screen is a bit annoying to work with due to the Brickman OS interference.
         #   Note you could've run this program with Brickman too, but screen draws would last one 1 second each.
-
         btn.process()  # Monitors for the Back button to exit the program if called.
+        rc1.process()
+        rc2.process()
+        rc3.process()
+        rc4.process()
         time.sleep(0.01)
 
     # When the program completes (the user hit the Back button), display a crying image and say goodbye.
