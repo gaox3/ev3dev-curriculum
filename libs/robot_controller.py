@@ -74,12 +74,12 @@ class Snatch3r(object):
         ev3.Sound.beep()
 
     def arm_down(self):
-        self.arm_motor.run_to_abs_pos(speed_sp=self.MAX_SPEED)
+        self.arm_motor.run_to_abs_pos(position_sp=0, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
         ev3.Sound.beep()
 
     def shutdown(self):
-        self.arm_motor.run_to_abs_pos(speed_sp=self.MAX_SPEED)
+        self.arm_motor.run_to_abs_pos(position_sp=0, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
         self.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)

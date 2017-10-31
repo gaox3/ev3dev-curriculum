@@ -59,27 +59,16 @@ def main():
 
     rc1 = ev3.RemoteControl(channel=1)
     assert rc1.connected
-    while True:
-        if rc1.on_red_up:
-            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
-            robot.left_motor.run_forever(speed_sp=600)
-        elif rc1.on_red_down:
-            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
-            robot.left_motor.run_forever(speed_sp=-600)
-        elif rc1.on_blue_up:
-            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
-            robot.right_motor.run_forever(speed_sp=600)
-        elif rc1.on_blue_down:
-            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
-            robot.right_motor.run_forever(speed_sp=-600)
-        elif not rc1.connected:
-            break
+    rc1.on_red_up = lambda state: red_up(state, robot)
+    rc1.on_red_down = lambda state: red_down(state, robot)
+    rc1.on_blue_up = lambda state: blue_up(state, robot)
+    rc1.on_blue_down = lambda state: blue_down(state, robot)
 
     rc2 = ev3.RemoteControl(channel=2)
     assert rc2.connected
-    rc2.on_red_up = lambda state: handle_arm_up_button()
-    rc2.on_red_down = lambda state: handle_arm_down_button()
-    rc2.on_blue_up = lambda state: handle_calibrate_button()
+    rc2.on_red_up = lambda state: handle_arm_up_button(state, robot)
+    rc2.on_red_down = lambda state: handle_arm_down_button(state, robot)
+    rc2.on_blue_up = lambda state: handle_calibrate_button(state, robot)
     # DONE: 4. Add the necessary IR handler callbacks as per the instructions above.
     # Remote control channel 1 is for driving the crawler tracks around (none of these functions exist yet below).
     # Remote control channel 2 is for moving the arm up and down (all of these functions already exist below).
@@ -93,6 +82,8 @@ def main():
     while dc.running:
         # DONE: 5. Process the RemoteControl objects.
         btn.process()
+        rc1.process()
+        rc2.process()
         time.sleep(0.01)
 
     # DONE: 2. Have everyone talk about this problem together then pick one  member to modify libs/robot_controller.py
@@ -107,7 +98,7 @@ def main():
 # Some event handlers have been written for you (ones for the arm).
 # Movement event handlers have not been provided.
 # ----------------------------------------------------------------------
-# TODO: 6. Implement the IR handler callbacks handlers.
+# DONE: 6. Implement the IR handler callbacks handlers.
 
 # TODO: 7. When your program is complete, call over a TA or instructor to sign your checkoff sheet and do a code review.
 #
@@ -160,6 +151,43 @@ def handle_shutdown(button_state, dc):
     """
     if button_state:
         dc.running = False
+
+
+def red_up(button_state, robot):
+    if button_state:
+        ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+        robot.left_motor.run_forever(speed_sp=600)
+    else:
+        ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+        robot.left_motor.stop()
+
+
+def red_down(button_state, robot):
+    if button_state:
+        ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.RED)
+        robot.left_motor.run_forever(speed_sp=-600)
+    else:
+        ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+        robot.left_motor.stop()
+
+
+def blue_up(button_state, robot):
+    if button_state:
+        ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
+        robot.right_motor.run_forever(speed_sp=600)
+    else:
+        ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+        robot.right_motor.stop()
+
+
+def blue_down(button_state, robot):
+    if button_state:
+        ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+        robot.right_motor.run_forever(speed_sp=-600)
+    else:
+        ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+        robot.right_motor.stop()
+
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

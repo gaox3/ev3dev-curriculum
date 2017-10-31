@@ -64,6 +64,7 @@ def main():
     # screen images. If you run Screen programs via SSH print commands work as expected.
 
     # Object that is storing references to images that can be passed into callbacks.
+
     dc = DataContainer()
 
     display_image(dc.lcd_screen, dc.eyes)  # Display an image on the EV3 screen
