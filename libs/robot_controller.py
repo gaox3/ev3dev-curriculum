@@ -10,22 +10,25 @@
   the IR remote up button for something different.  Instead just make a method called arm_up that
   could be called.  That way it's a generic action that could be used in any task.
 """
-
 import ev3dev.ev3 as ev3
+import time
 
 
 class Snatch3r(object):
     """Commands for the Snatch3r robot that might be useful in many different programs."""
 
-    # DONE: Implement the Snatch3r class as needed when working the sandox exercises
-    # (and delete these comments)
     def __init__(self):
-        # ev3.Sound.speak("Drive using input").wait()
+        self.arm_motor = ev3.MediumMotor(ev3.OUTPUT_A)
+        assert self.arm_motor.connected
         self.left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
-        self.right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
         assert self.left_motor.connected
+        self.right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
         assert self.right_motor.connected
+        self.touch_sensor = ev3.TouchSensor()
+        assert self.touch_sensor
+        self.MAX_SPEED = 900
 
+    # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
         self.left_motor.run_to_rel_pos(speed_sp=speed, position_sp=position * 90,
                                        stop_action=ev3.Motor.STOP_ACTION_BRAKE)
@@ -47,3 +50,41 @@ class Snatch3r(object):
                                             stop_action=ev3.Motor.STOP_ACTION_BRAKE)
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+
+    # ---DIGITAL INPUTS----------------------------------------------------------------
+    def arm_calibration(self):
+        self.arm_motor.run_forever(speed_sp=self.MAX_SPEED)
+        while not self.touch_sensor.is_pressed:
+            time.sleep(0.01)
+        self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        ev3.Sound.beep()
+
+        arm_revolutions_for_full_range = 14.2
+        self.arm_motor.run_to_rel_pos(position_sp=-360 * arm_revolutions_for_full_range)
+        self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        ev3.Sound.beep()
+
+        self.arm_motor.position = 0
+
+    def arm_up(self):
+        self.arm_motor.run_forever(speed_sp=self.MAX_SPEED)
+        while not self.touch_sensor.is_pressed:
+            time.sleep(0.01)
+        self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        ev3.Sound.beep()
+
+    def arm_down(self):
+        self.arm_motor.run_to_abs_pos(speed_sp=self.MAX_SPEED)
+        self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        ev3.Sound.beep()
+
+    def shutdown(self):
+        self.arm_motor.run_to_abs_pos(speed_sp=self.MAX_SPEED)
+        self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+        self.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+        self.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+        ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+        ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
+        print("Goodbye!")
+        ev3.Sound.speak("Goodbye").wait()
