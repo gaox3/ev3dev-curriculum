@@ -72,9 +72,10 @@ class MyDelegate(object):
     def __init__(self):
         self.running = True
         self.led_side = None
-        self.lea_color = None
+        self.led_color = None
 
     def set_led(self, led_side_string, led_color_string):
+        print(led_side_string, led_color_string)
         if led_side_string == "left":
             self.led_side = ev3.Leds.LEFT
         elif led_side_string == "right":
@@ -82,10 +83,13 @@ class MyDelegate(object):
 
         if led_color_string == "green":
             self.led_color = ev3.Leds.GREEN
+            ev3.Leds.set_color(self.led_side, self.led_color)
         elif led_color_string == "red":
             self.led_color = ev3.Leds.RED
+            ev3.Leds.set_color(self.led_side, self.led_color)
         elif led_color_string == "black":
             self.led_color = ev3.Leds.BLACK
+            ev3.Leds.set_color(self.led_side, self.led_color)
 
         if self.led_side is None or self.led_color is None:
             print("Invalid parameters sent to set_led. led_side_string = {} led_color_string = {}".format(
