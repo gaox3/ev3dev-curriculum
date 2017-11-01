@@ -18,7 +18,7 @@ In addition to the MQTT goals, this example will show some tkinter tricks:
 Authors: David Fisher and Ding Nie.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-# TODO: 2. Select one team member to open libs/mqtt_remote_method_calls.py and complete the TO DO that is in that file.
+# DONE: 2. Select one team member to open libs/mqtt_remote_method_calls.py and complete the TO DO that is in that file.
 # After making that change, they should commit their work and all other team members should do a VCS -> Update
 # After all team members see that file changed you can move on to the next TO DO
 # Also someone should update the libs/mqtt_remote_method_calls.py file on the robot too (at some point before nied).
@@ -108,7 +108,7 @@ def left_mouse_click(event, mqtt_client):
     # All of your teammates should receive the message and create a circle of your color at your click location.
     # Additionally you will receive your own message and draw a circle in your color too.
 
-    # TODO: 8. Help get everyone on your team running this program at the same time.
+    # DONE: 8. Help get everyone on your team running this program at the same time.
     # You should be able to see circles on your computer from everyone else on your team.
     # Try to draw the first letter of your name in circles. :)
 
