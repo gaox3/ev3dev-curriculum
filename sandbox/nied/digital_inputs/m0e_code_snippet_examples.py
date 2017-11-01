@@ -137,7 +137,6 @@ def button_events_using_lambda_with_objects():
         btn.process()
         time.sleep(0.01)
 
-
 def leds_example():
     """Basic LED example"""
     touch_sensor = ev3.TouchSensor()

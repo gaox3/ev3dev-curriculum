@@ -50,10 +50,10 @@ def main():
     #   .on_left to call handle_left_button (that function does not exist yet, you will write it in todo4)
     #   .on_right to call handle_right_button (that function does not exist yet, you will write it in todo4)
     # Here is one for free...
-    btn.on_up = handle_up_button
-    btn.on_down = handle_down_button
-    btn.on_left = handle_left_button
-    btn.on_right = handle_right_button
+    btn.on_up = lambda state: handle_up_button(state)
+    btn.on_down = lambda state: handle_down_button(state)
+    btn.on_left = lambda state: handle_left_button(state)
+    btn.on_right = lambda state: handle_right_button(state)
 
     # DONE: 5. Note #4 is lower (this is TO DO #5 which you should do after #4).
     # Add a lambda callback for on_backspace.  The syntax of lambda is:
