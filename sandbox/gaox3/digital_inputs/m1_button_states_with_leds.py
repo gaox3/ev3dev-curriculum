@@ -70,8 +70,20 @@ def main():
         #   Optional: You can also comment out the code above that does the 6 second red, green, off pattern.  It was
         #     there just to provide you with code examples for using the LEDs.  It does not need to run anymore.
         #     Just make sure not to comment out too much. ;)
+        btn = ev3.Button()
 
-
+        if btn.up:
+            print("up")
+            ev3.Leds.all_off()
+        elif btn.left:
+            print("left")
+            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
+            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.BLACK)
+        elif btn.right:
+            print("right")
+            ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.BLACK)
+            ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.RED)
+        # time.sleep(.01)
         # TODO: 4. Implement the down button to change the color of both LEDs.
         #   The first press to down should make both LEDs GREEN, the next press makes them RED, then AMBER, then off.
         #   If the user presses the down button again, wrap around the list to GREEN and continue as before.
@@ -79,6 +91,16 @@ def main():
         #   Since you are only allowed to use states, not event callbacks, this last request is a pain, but it's doable
         #     with a while loop that blocks code execution until the down instance variable is False.
         #     Use a time.sleep(0.01) inside the while loop to do nothing but wait for the button to be released.
+
+        elif btn.down:
+            colors = [ev3.Leds.GREEN, ev3.Leds.RED, ev3.Leds.AMBER, ev3.Leds.Black]
+            for k in range(len(colors)):
+                if k <= len(colors):
+                    ev3.leds.set_color(ev3.Leds.LEFT, colors[k])
+                    ev3.leds.set_color(ev3.Leds.RIGHT, colors[k])
+                    k = k + 1
+                else:
+                    k = 0
 
         # TODO: 5. Formally test your work. When you think you have the problem complete run these tests:
         #   Press Left - Green left LED is on (try holding the button down for a few seconds when you to the press)
@@ -101,15 +123,13 @@ def main():
 
         if btn.backspace:
             break
-        time.sleep(0.01)  # Best practice to have a short delay to avoid working too hard between loop iterations.
-
-    # Best practice to leave the LEDs on after you finish a program so you don't put away the robot while still on.
+        time.sleep(
+            0.01)  # Best practice to have a short delay to avoid working too hard between loop iterations.  # Best practice to leave the LEDs on after you finish a program so you don't put away the robot while still on.
     ev3.Leds.set_color(ev3.Leds.LEFT, ev3.Leds.GREEN)
     ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
-    ev3.Sound.speak("Goodbye").wait()
+    ev3.Sound.speak("Goodbye").wait()  # ----------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # ----------------------------------------------------------------------
 main()
