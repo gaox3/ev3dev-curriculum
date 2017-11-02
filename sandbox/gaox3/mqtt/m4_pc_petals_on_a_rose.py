@@ -35,7 +35,7 @@ class MyDelegate(object):
 
 
 def main():
-    # TODO: 4. Create a my_delegate object from your MyDelegate class
+    # DONE: 4. Create a my_delegate object from your MyDelegate class
     # Create an mqtt_client object from the com.MqttClient class passing in my_delegate
     # connect_to_ev3
     my_delegate = MyDelegate()
@@ -91,7 +91,7 @@ def set_num_dice(mqtt_client, num_dice_entry):
     mqtt_client.send_message("set_number_of_dice", [int(num_dice_entry.get())])
 
 
-# TODO: 7. See if you can solve the mystery.  Based on the dice how can you solve Petals on a Rose?
+# DONE: 7. See if you can solve the mystery.  Based on the dice how can you solve Petals on a Rose?
 # To check off this part of the assignment figure out the pattern and win the game (without looking at the EV3 code).
 
 
