@@ -137,12 +137,12 @@ def send_down(mqtt_client):
 
 def forward(mqtt_client,left_speed_entry, right_speed_entry):
     print("forward")
-    mqtt_client.send_message("forward", [left_speed_entry, right_speed_entry])
+    mqtt_client.send_message("forward", [int(left_speed_entry.get()), int(right_speed_entry.get())])
 
 
 def left(mqtt_client, left_speed_entry, right_speed_entry):
     print("left")
-    mqtt_client.send_message("left", [left_speed_entry, right_speed_entry])
+    mqtt_client.send_message("left", [int(left_speed_entry.get()), int(right_speed_entry.get())])
 
 
 def stop(mqtt_client):
@@ -152,12 +152,12 @@ def stop(mqtt_client):
 
 def right(mqtt_client, left_speed_entry, right_speed_entry):
     print("right")
-    mqtt_client.send_message("right", [left_speed_entry, right_speed_entry])
+    mqtt_client.send_message("right", [int(left_speed_entry.get()), int(right_speed_entry.get())])
 
 
 def back(mqtt_client, left_speed_entry, right_speed_entry):
     print("back")
-    mqtt_client.send_message("back", [left_speed_entry, right_speed_entry])
+    mqtt_client.send_message("back", [int(left_speed_entry.get()), int(right_speed_entry.get())])
 
 
 # Quit and Exit button callbacks
