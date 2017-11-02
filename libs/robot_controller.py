@@ -27,6 +27,7 @@ class Snatch3r(object):
         self.touch_sensor = ev3.TouchSensor()
         assert self.touch_sensor
         self.MAX_SPEED = 900
+        self.running = True
 
     # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
@@ -50,6 +51,26 @@ class Snatch3r(object):
                                             stop_action=ev3.Motor.STOP_ACTION_BRAKE)
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+
+    def stop(self):
+        self.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        self.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+
+    def forward(self, left_speed_entry, right_speed_entry):
+        self.left_motor.run_forever(speed_sp=left_speed_entry)
+        self.right_motor.run_forever(speed_sp=right_speed_entry)
+
+    def back(self, left_speed_entry, right_speed_entry):
+        self.left_motor.run_forever(speed_sp=-left_speed_entry)
+        self.right_motor.run_forever(speed_sp=-right_speed_entry)
+
+    def left(self, left_speed_entry, right_speed_entry):
+        self.left_motor.run_forever(speed_sp=-left_speed_entry)
+        self.right_motor.run_forever(speed_sp=right_speed_entry)
+
+    def right(self, left_speed_entry, right_speed_entry):
+        self.left_motor.run_forever(speed_sp=left_speed_entry)
+        self.right_motor.run_forever(speed_sp=-right_speed_entry)
 
     # ---DIGITAL INPUTS----------------------------------------------------------------
     def arm_calibration(self):
@@ -79,6 +100,7 @@ class Snatch3r(object):
         ev3.Sound.beep()
 
     def shutdown(self):
+        self.running = False
         self.arm_motor.run_to_abs_pos(position_sp=0, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
@@ -91,7 +113,7 @@ class Snatch3r(object):
 
     # ---MQTT----------------------------------------------------------------------------
     def loop_forever(self):
-        self.running = True
+        self.arm_calibration()
         while self.running:
             time.sleep(0.1)
 
