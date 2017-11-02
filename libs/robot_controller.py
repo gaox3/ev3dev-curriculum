@@ -28,6 +28,8 @@ class Snatch3r(object):
         assert self.touch_sensor
         self.MAX_SPEED = 900
         self.running = True
+        self.color_sensor = ev3.ColorSensor()
+        assert self.color_sensor
 
     # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
@@ -100,7 +102,6 @@ class Snatch3r(object):
         ev3.Sound.beep()
 
     def shutdown(self):
-        self.running = False
         self.arm_motor.run_to_abs_pos(position_sp=0, speed_sp=self.MAX_SPEED)
         self.arm_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
@@ -110,6 +111,7 @@ class Snatch3r(object):
         ev3.Leds.set_color(ev3.Leds.RIGHT, ev3.Leds.GREEN)
         print("Goodbye!")
         ev3.Sound.speak("Goodbye").wait()
+        self.running = False
 
     # ---MQTT----------------------------------------------------------------------------
     def loop_forever(self):
