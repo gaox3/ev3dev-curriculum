@@ -29,10 +29,10 @@ def main():
     robot = robo.Snatch3r()
     try:
         while True:
-            Found = seek_beacon(robot)
+            found = seek_beacon(robot)
             # DONE: 5. Save the result of the seek_beacon function (a bool), then use that value to only say "Found the
             # beacon" if the return value is True.  (i.e. don't say "Found the beacon" if the attempts was cancelled.)
-            if Found is True:
+            if found is True:
                 ev3.Sound.speak("Found the beacon")
 
             command = input("Hit enter to seek the beacon again or enter q to quit: ")
