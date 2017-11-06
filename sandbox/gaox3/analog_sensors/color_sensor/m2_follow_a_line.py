@@ -27,10 +27,10 @@ def main():
     print("--------------------------------------------")
     ev3.Sound.speak("Follow a line").wait()
 
-    # TODO: 4: After running the code set the default white and black levels to a better initial guess.
+    # DONE: 4: After running the code set the default white and black levels to a better initial guess.
     #   Once you have the values hardcoded to resonable numbers here you don't really need the w and b commands below.
-    white_level = 95
-    black_level = 5
+    white_level = 85
+    black_level = 15
     robot = robo.Snatch3r()
 
     while True:
@@ -43,13 +43,14 @@ def main():
             #   self.color_sensor = ev3.ColorSensor()
             #   assert self.color_sensor
             # Then here you can use a command like robot.color_sensor.reflected_light_intensity
-            white_level = robo.color_sensor.reflected_light_intensity
+            white_level = robot.color_sensor.reflected_light_intensity
 
             print("New white level is {}.".format(white_level))
         elif command_to_run == 'b':
             print("Calibrate the black light level")
             # DONE: 3. Read the reflected_light_intensity property of the color sensor and set black_level
-            black_level = robo.color_sensor.reflected_light_intensity
+            black_level = robot.color_sensor.reflected_light_intensity
+
             print("New black level is {}.".format(black_level))
         elif command_to_run == 'f':
             print("Follow the line until the touch sensor is pressed.")
@@ -75,10 +76,16 @@ def follow_the_line(robot, white_level, black_level):
       :type black_level: int
     """
 
-    # TODO: 5. Use the calibrated values for white and black to calculate a light threshold to determine if your robot
+    # DONE: 5. Use the calibrated values for white and black to calculate a light threshold to determine if your robot
     # should drive straight or turn to the right.  You will need to test and refine your code until it works well.
     # Optional extra - For a harder challenge could you drive on the black line and handle left or right turns?
-
+    while not robot.touch_sensor.is_pressed:
+        if robot.color_sensor.reflected_light_intensity < 15:
+            robot.left_motor.run_forever(speed_sp=300)
+            robot.right_motor.run_forever(speed_sp=300)
+        else:
+            robot.left_motor.run_forever(speed_sp=300)
+            robot.right_motor.run_forever(speed_sp=-100)
     robot.stop()
     ev3.Sound.speak("Done")
 

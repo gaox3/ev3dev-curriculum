@@ -17,14 +17,6 @@ import time
 import robot_controller as robo
 
 
-class DataContainer(object):
-    """ Helper class that might be useful to communicate between different callbacks."""
-
-    def __init__(self):
-        self.running = True
-        self.ir_sensor = ev3.InfraredSensor()
-        assert self.ir_sensor
-
 def main():
     print("--------------------------------------------")
     print(" Beep at hands")
@@ -38,17 +30,15 @@ def main():
     # the code below works to monitor the touch_sensor.
 
     while not robot.touch_sensor.is_pressed:
-        # TODO: 2. Implement the module as described in the opening comment block.
+        # DONE: 2. Implement the module as described in the opening comment block.
         # It is recommended that you add to your Snatch3r class's constructor the ir_sensor, as shown
         #   self.ir_sensor = ev3.InfraredSensor()
         #   assert self.ir_sensor
         # Then here you can use a command like robot.ir_sensor.proximity
-        robot.left_motor.run_forever(speed_sp=900)
-        robot.right_motor.run_forever(speed_sp=900)
-
-    robot.left_motor.stop()
-    robot.right_motor.stop()
-    time.sleep(0.1)
+        if robot.ir_sensor.proximity < 10:
+            ev3.Sound.beep()
+            time.sleep(1.5)
+        time.sleep(0.1)
 
     # TODO: 3. Call over a TA or instructor to sign your team's checkoff sheet.
     #
