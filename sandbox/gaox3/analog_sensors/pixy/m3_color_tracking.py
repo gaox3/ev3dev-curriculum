@@ -42,7 +42,7 @@ def main():
             robot.turn_degrees(90, -turn_speed)
         elif pixy.value(1) > 170:
             robot.turn_degrees((90, turn_speed))
-        elif 150 < pixy.value(1) < 170:
+        elif 150 <= pixy.value(1) <= 170:
             robot.stop()
 
 
