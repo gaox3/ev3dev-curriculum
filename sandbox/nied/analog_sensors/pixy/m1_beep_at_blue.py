@@ -35,8 +35,10 @@ def main():
         #   self.pixy = ev3.Sensor(driver_name="pixy-lego")
         #   assert self.pixy
         # Then here you can use a command like width = robot.pixy.value(3)
-
-
+        current_color = robot.color_sensor.color
+        if current_color == ev3.ColorSensor.COLOR_BLUE:
+            print(robot.pixy.value(1), robot.pixy.value(2), robot.pixy.value(3), robot.pixy.value(4))
+            ev3.Sound.beep()
 
         time.sleep(0.1)
 

@@ -5,8 +5,8 @@ the robot so that it is always facing the color signature.  You will need to tea
 implement the code, then make the robot always face the color as you move it around.  The robot will only spin and never
 move forwards or backwards.
 
-Authors: David Fisher and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+Authors: David Fisher and Ding Nie.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import ev3dev.ev3 as ev3
 import time
