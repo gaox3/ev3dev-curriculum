@@ -38,7 +38,9 @@ def main():
         current_color = robot.color_sensor.color
         if current_color == ev3.ColorSensor.COLOR_BLUE:
             print(robot.pixy.value(1), robot.pixy.value(2), robot.pixy.value(3), robot.pixy.value(4))
-            ev3.Sound.beep()
+            if robot.pixy.value(3) > 0:
+                ev3.Sound.beep()
+                time.sleep(1)
 
         time.sleep(0.1)
 
