@@ -35,7 +35,6 @@ Implement the TODOs below to complete this module, then transfer the file to the
 Authors: David Fisher and Xiang Gao.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-
 import mqtt_remote_method_calls as com
 
 import ev3dev.ev3 as ev3
@@ -68,7 +67,6 @@ import time
 #         ev3.Leds.set_color(led_side, led_color)
 
 class MyDelegate(object):
-
     def __init__(self):
         self.running = True
 
