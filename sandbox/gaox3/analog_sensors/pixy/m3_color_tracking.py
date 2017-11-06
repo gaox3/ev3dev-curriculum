@@ -38,7 +38,7 @@ def main():
         #   If the Pixy x value is greater than 170 turn right (turn_speed, -turn_speed)
         #   If the Pixy x value is between 150 and 170 stop the robot
         # Continuously track the color until the touch sensor is pressed to end the program.
-        if pixy.value(1) < 150:
+        if pixy.value(1) < 150:`
             robot.turn_degrees(90, -turn_speed)
         elif pixy.value(1) > 170:
             robot.turn_degrees((90, turn_speed))
