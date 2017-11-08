@@ -37,6 +37,7 @@ def main():
 
             command = input("Hit enter to seek the beacon again or enter q to quit: ")
             if command == "q":
+                robot.stop()
                 break
     except:
         traceback.print_exc()
