@@ -33,7 +33,8 @@ def main():
             # DONE: 5. Save the result of the seek_beacon function (a bool), then use that value to only say "Found the
             # beacon" if the return value is True.  (i.e. don't say "Found the beacon" if the attempts was cancelled.)
             if found is True:
-                ev3.Sound.speak("Found the beacon")
+                ev3.Sound.speak("Found the beacon").wait(2)
+                robot.stop()
 
             command = input("Hit enter to seek the beacon again or enter q to quit: ")
             if command == "q":
@@ -96,7 +97,7 @@ def seek_beacon(robot):
                     robot.forward(forward_speed, forward_speed)
                 elif current_distance ==0:
                     return True
-            elif 2 <= math.fabs(current_heading) <= 10:
+            elif 2 <= math.fabs(current_heading) < 10:
                 if current_heading < 0:
                     robot.left(turn_speed, turn_speed)
                 elif current_heading > 0:

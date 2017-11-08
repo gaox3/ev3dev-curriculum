@@ -143,9 +143,9 @@ class Snatch3r(object):
                     print("On the right heading. Distance: ", current_distance)
                     if current_distance > 0:
                         self.forward(forward_speed, forward_speed)
-                    elif current_distance == 0:
+                    elif current_distance <= 0:
                         return True
-                elif 2 <= math.fabs(current_heading) <= 10:
+                elif 2 <= math.fabs(current_heading) < 10:
                     if current_heading < 0:
                         self.left(turn_speed, turn_speed)
                     elif current_heading > 0:
