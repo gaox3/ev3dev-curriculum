@@ -33,7 +33,7 @@ def main():
             # DONE: 5. Save the result of the seek_beacon function (a bool), then use that value to only say "Found the
             # beacon" if the return value is True.  (i.e. don't say "Found the beacon" if the attempts was cancelled.)
             if found is True:
-                ev3.Sound.speak("Found the beacon").wait(2)
+                ev3.Sound.speak("Found the beacon").wait()
                 robot.stop()
 
             command = input("Hit enter to seek the beacon again or enter q to quit: ")
@@ -95,7 +95,7 @@ def seek_beacon(robot):
                 print("On the right heading. Distance: ", current_distance)
                 if current_distance > 0:
                     robot.forward(forward_speed, forward_speed)
-                elif current_distance ==0:
+                elif current_distance <= 0:
                     return True
             elif 2 <= math.fabs(current_heading) < 10:
                 if current_heading < 0:
@@ -114,7 +114,7 @@ def seek_beacon(robot):
     robot.stop()
     return False
 
-    # TODO: 6. Demo your program by putting the beacon within a few feet of the robot, within 30 degrees of straight in
+    # DONE: 6. Demo your program by putting the beacon within a few feet of the robot, within 30 degrees of straight in
     # front.  The robot should drive to and stop at the beacon.  After a successful run move the beacon then do it again
     # for the demo.  During testing if your robot fails to find the beacon remember that you can press the touch sensor
     # to abandon ship on the attempt. ;) You must demo 2 successful finds to check off but you can have as many attempts
