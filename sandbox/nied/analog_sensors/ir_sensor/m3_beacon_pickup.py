@@ -44,7 +44,6 @@ def main():
             found_beacon = robot.seek_beacon()
             if found_beacon is True:
                 robot.stop()
-                robot.turn_degrees(-20, -100)
                 robot.drive_inches(3, 100)
                 ev3.Sound.speak("I got the beacon")
                 robot.arm_up()
