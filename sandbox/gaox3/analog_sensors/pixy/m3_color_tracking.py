@@ -38,22 +38,17 @@ def main():
         #   If the Pixy x value is greater than 170 turn right (turn_speed, -turn_speed)
         #   If the Pixy x value is between 150 and 170 stop the robot
         # Continuously track the color until the touch sensor is pressed to end the program.
-        if pixy.value(1) < 150:`
+        if 0 < robot.pixy.value(1) < 150:
             robot.turn_degrees(90, -turn_speed)
-        elif pixy.value(1) > 170:
+        elif robot.pixy.value(1) > 170:
             robot.turn_degrees((90, turn_speed))
-        elif 150 <= pixy.value(1) <= 170:
+        elif 150 <= robot.pixy.value(1) <= 170:
             robot.stop()
-
-
 
         time.sleep(0.25)
 
-    print("Goodbye!")
-    ev3.Sound.speak("Goodbye").wait()
-
-
-# TODO: 4. Call over a TA or instructor to sign your team's checkoff sheet.
+        print("Goodbye!")
+        ev3.Sound.speak("Goodbye").wait()  # TODO: 4. Call over a TA or instructor to sign your team's checkoff sheet.
 #
 # Observations you should make, the Pixy cam could potentially be used for a lot of cool project ideas, but if you
 # decide to use the Pixy you should be aware of what it does well and what it doesn't do well.
