@@ -128,7 +128,7 @@ class Snatch3r(object):
     def seek_beacon(self):
         rc1 = ev3.RemoteControl(channel=1)
         assert rc1.connected
-        beacon_seeker = ev3.BeaconSeeker
+        beacon_seeker = ev3.BeaconSeeker()
         forward_speed = 300
         turn_speed = 100
         slow_turn_speed = 30
@@ -144,7 +144,6 @@ class Snatch3r(object):
                     if current_distance > 0:
                         self.forward(forward_speed, forward_speed)
                     elif current_distance == 0:
-                        self.stop()
                         return True
                 elif 2 <= math.fabs(current_heading) <= 10:
                     if current_heading < 0:

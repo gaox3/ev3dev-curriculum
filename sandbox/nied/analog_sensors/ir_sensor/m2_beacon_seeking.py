@@ -58,7 +58,7 @@ def seek_beacon(robot):
     # DONE: 2. Create a BeaconSeeker object on channel 1.
     rc1 = ev3.RemoteControl(channel=1)
     assert rc1.connected
-    beacon_seeker = ev3.BeaconSeeker
+    beacon_seeker = ev3.BeaconSeeker()
     forward_speed = 300
     turn_speed = 100
 
@@ -94,7 +94,6 @@ def seek_beacon(robot):
                 if current_distance > 0:
                     robot.forward(forward_speed, forward_speed)
                 elif current_distance ==0:
-                    robot.stop()
                     return True
             elif 2 <= math.fabs(current_heading) <= 10:
                 if current_heading < 0:

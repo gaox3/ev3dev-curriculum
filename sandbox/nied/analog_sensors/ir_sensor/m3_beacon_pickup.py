@@ -42,7 +42,8 @@ def main():
     try:
         while True:
             found_beacon = robot.seek_beacon()
-            if found_beacon:
+            if found_beacon is True:
+                robot.stop()
                 ev3.Sound.speak("I got the beacon")
                 robot.arm_up()
                 time.sleep(1)
