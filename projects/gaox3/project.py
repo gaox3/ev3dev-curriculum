@@ -25,14 +25,11 @@ def main():
     right_speed_entry.insert(0, "600")
     right_speed_entry.grid(row=1, column=2)
 
-
     forward_button = ttk.Button(main_frame, text="Forward")
     forward_button.grid(row=2, column=1)
 
-
     left_button = ttk.Button(main_frame, text="Left")
     left_button.grid(row=3, column=0)
-
 
     stop_button = ttk.Button(main_frame, text="Stop")
     stop_button.grid(row=3, column=1)
@@ -40,10 +37,8 @@ def main():
     right_button = ttk.Button(main_frame, text="Right")
     right_button.grid(row=3, column=2)
 
-
     back_button = ttk.Button(main_frame, text="Back")
     back_button.grid(row=4, column=1)
-
 
     up_button = ttk.Button(main_frame, text="Up")
     up_button.grid(row=5, column=0)
@@ -54,7 +49,6 @@ def main():
     down_button.grid(row=6, column=0)
     down_button['command'] = lambda: send_down(mqtt_client)
     root.bind('<j>', lambda event: send_down(mqtt_client))
-
 
     q_button = ttk.Button(main_frame, text="Quit")
     q_button.grid(row=5, column=2)
@@ -76,10 +70,13 @@ def send_down(mqtt_client):
     print("arm_down")
     mqtt_client.send_message("arm_down")
 
+
 def quit_program(mqtt_client, shutdown_ev3):
     if shutdown_ev3:
         print("shutdown")
         mqtt_client.send_message("shutdown")
     mqtt_client.close()
     exit()
+
+
 main()
