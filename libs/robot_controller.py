@@ -37,6 +37,7 @@ class Snatch3r(object):
         self.pixy = ev3.Sensor(driver_name="pixy-lego")
         assert self.pixy
         self.active = False
+        self.sides = 0
 
     # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
@@ -167,3 +168,6 @@ class Snatch3r(object):
 
     def deactivate(self):
         self.active = False
+
+    def sides(self, sides_entry):
+        self.sides = sides_entry

@@ -28,6 +28,13 @@ def main():
     left_speed_entry.insert(0, "600")
     left_speed_entry.grid(row=1, column=0)
 
+    sides_button = ttk.Button(main_frame, text="Sides")
+    sides_button.grid(row=0, column=1)
+    sides_entry = ttk.Entry(main_frame, width=1)
+    sides_entry.insert(0, "3")
+    sides_entry.grid(row=1, column=1)
+    sides_button['command'] = lambda: sides(mqtt_client, sides_entry)
+
     right_speed_label = ttk.Label(main_frame, text="Right")
     right_speed_label.grid(row=0, column=2)
     right_speed_entry = ttk.Entry(main_frame, width=8, justify=tkinter.RIGHT)
@@ -90,6 +97,10 @@ def main():
 
     root.mainloop()
 # ---------------------------------------------------------------------------------------------------------------------
+
+
+def sides(mqtt_client, sides_entry):
+    mqtt_client.send_message("sides", [int(sides_entry.get())])
 
 
 def send_up(mqtt_client):
