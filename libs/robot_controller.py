@@ -28,6 +28,7 @@ class Snatch3r(object):
         self.touch_sensor = ev3.TouchSensor()
         assert self.touch_sensor
         self.MAX_SPEED = 900
+        self.SLOW_SPEED = 100
         self.running = True
         self.color_sensor = ev3.ColorSensor()
         assert self.color_sensor
@@ -35,6 +36,7 @@ class Snatch3r(object):
         assert self.ir_sensor
         self.pixy = ev3.Sensor(driver_name="pixy-lego")
         assert self.pixy
+        self.active = False
 
     # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
@@ -60,8 +62,8 @@ class Snatch3r(object):
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
 
     def stop(self):
-        self.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-        self.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        self.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+        self.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
 
     def forward(self, left_speed_entry, right_speed_entry):
         self.left_motor.run_forever(speed_sp=left_speed_entry)
@@ -159,4 +161,9 @@ class Snatch3r(object):
         self.stop()
         return False
 
+    # ---DING NIE------------------------------------------------------------------
+    def activate(self):
+        self.active = True
 
+    def deactivate(self):
+        self.active = False

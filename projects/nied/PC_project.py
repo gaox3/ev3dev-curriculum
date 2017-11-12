@@ -7,9 +7,9 @@ import time
 import math
 
 
-class MyDelegate(object):
-    def __init__(self, canvas):
-        self.canvas = canvas
+class MyDelegatePC(object):
+    def __init__(self):
+        self.running = True
 
 
 def main():
@@ -18,9 +18,7 @@ def main():
     main_frame = ttk.Frame(root, padding=20, relief='raised')
     main_frame.grid()
 
-    canvas = tkinter.Canvas(main_frame, background="lightgray", width=320, height=200)
-    canvas.grid(columnspan=2)
-    my_delegate = MyDelegate(canvas)
+    my_delegate = MyDelegatePC()
     mqtt_client = com.MqttClient(my_delegate)
     mqtt_client.connect_to_ev3()
 # ---------------------------------------------------------------------------------------------------------------------
@@ -61,6 +59,17 @@ def main():
     back_button['command'] = lambda: back(mqtt_client, left_speed_entry, right_speed_entry)
     root.bind('<Down>', lambda event: back(mqtt_client, left_speed_entry, right_speed_entry))
 
+    left_side_label = ttk.Label(main_frame, text="Feed Me!")
+    left_side_label.grid(row=5, column=1)
+
+    hungry_button = ttk.Button(main_frame, text="Hungry")
+    hungry_button.grid(row=6, column=1)
+    hungry_button['command'] = lambda: activate(mqtt_client)
+
+    full_button = ttk.Button(main_frame, text="Full")
+    full_button.grid(row=7, column=1)
+    full_button['command'] = lambda: deactivate(mqtt_client)
+
     up_button = ttk.Button(main_frame, text="Up")
     up_button.grid(row=5, column=0)
     up_button['command'] = lambda: send_up(mqtt_client)
@@ -91,6 +100,16 @@ def send_up(mqtt_client):
 def send_down(mqtt_client):
     print("arm_down")
     mqtt_client.send_message("arm_down")
+
+
+def activate(mqtt_client):
+    print("Time to Feed")
+    mqtt_client.send_message("activate")
+
+
+def deactivate(mqtt_client):
+    print("That's enough")
+    mqtt_client.send_message("deactivate")
 
 
 def forward(mqtt_client, left_speed_entry, right_speed_entry):
