@@ -22,12 +22,15 @@ def main():
     while robot.running is True:
 
         if robot.active is True:
-            for _ in range(sides):
+            for k in range(robot.sides):
+                robot.pixy.mode = pixy[k]
                 robot.forward(400,400)
-                if robot.color_sensor.reflected_light_intensity > 10:
+                if robot.color_sensor.reflected_light_intensity > 15:
                     robot.stop()
-                robot.turn_degrees(turn_amount, speed_deg_per_second)
-            robot.pixy.mode = "SIG3"
+                    robot.turn_degrees(180, 200)
+
+                    robot.turn_degrees(360/robot.sides, 200)
+
             # if robot.pixy.value(1) < 165:
             #     robot.left(robot.SLOW_SPEED, robot.SLOW_SPEED)
             # elif robot.pixy.value(1) > 185:
