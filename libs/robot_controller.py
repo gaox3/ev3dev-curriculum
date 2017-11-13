@@ -38,6 +38,7 @@ class Snatch3r(object):
         assert self.pixy
         self.active = False
         self.sides = 0
+        self.degrees_turned = 0
 
     # ---MOTORS------------------------------------------------------------------------
     def drive_inches(self, position, speed):
@@ -49,16 +50,12 @@ class Snatch3r(object):
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
 
     def turn_degrees(self, degrees_to_turn, turn_speed_sp):
-        if degrees_to_turn > 0:
-            self.left_motor.run_to_rel_pos(speed_sp=(-turn_speed_sp), position_sp=-5.1*degrees_to_turn,
-                                           stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.1*degrees_to_turn,
-                                            stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-        else:
-            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.1*degrees_to_turn,
-                                           stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-            self.right_motor.run_to_rel_pos(speed_sp=(-turn_speed_sp), position_sp=-5.1*degrees_to_turn,
-                                            stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+        if int(degrees_to_turn) > 0:
+            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-5.16*degrees_to_turn)
+            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.16*degrees_to_turn)
+        elif int(degrees_to_turn) < 0:
+            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-5.16*degrees_to_turn)
+            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.16*degrees_to_turn)
         self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
         self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
 
@@ -163,11 +160,21 @@ class Snatch3r(object):
         return False
 
     # ---DING NIE------------------------------------------------------------------
-    def activate(self):
+    def activate(self, sides_entry):
+        self.sides = sides_entry
         self.active = True
 
     def deactivate(self):
         self.active = False
 
-    def sides(self, sides_entry):
-        self.sides = sides_entry
+    def special_turn_degrees(self, degrees_to_turn, turn_speed_sp):
+        if degrees_to_turn > 0:
+            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-5.16*degrees_to_turn)
+            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.16*degrees_to_turn)
+        elif degrees_to_turn < 0:
+            self.left_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=-5.16*degrees_to_turn)
+            self.right_motor.run_to_rel_pos(speed_sp=turn_speed_sp, position_sp=5.16*degrees_to_turn)
+            self.left_motor.wait_while(ev3.Motor.STATE_RUNNING)
+            self.right_motor.wait_while(ev3.Motor.STATE_RUNNING)
+        self.degrees_turned = self.degrees_turned + degrees_to_turn
+

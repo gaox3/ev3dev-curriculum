@@ -28,12 +28,11 @@ def main():
     left_speed_entry.insert(0, "600")
     left_speed_entry.grid(row=1, column=0)
 
-    sides_button = ttk.Button(main_frame, text="Sides")
-    sides_button.grid(row=0, column=1)
+    sides_label = ttk.Label(main_frame, text="Sides")
+    sides_label.grid(row=0, column=1)
     sides_entry = ttk.Entry(main_frame, width=1)
     sides_entry.insert(0, "3")
     sides_entry.grid(row=1, column=1)
-    sides_button['command'] = lambda: sides(mqtt_client, sides_entry)
 
     right_speed_label = ttk.Label(main_frame, text="Right")
     right_speed_label.grid(row=0, column=2)
@@ -71,7 +70,7 @@ def main():
 
     hungry_button = ttk.Button(main_frame, text="Hungry")
     hungry_button.grid(row=6, column=1)
-    hungry_button['command'] = lambda: activate(mqtt_client)
+    hungry_button['command'] = lambda: activate(mqtt_client, sides_entry)
 
     full_button = ttk.Button(main_frame, text="Full")
     full_button.grid(row=7, column=1)
@@ -99,10 +98,6 @@ def main():
 # ---------------------------------------------------------------------------------------------------------------------
 
 
-def sides(mqtt_client, sides_entry):
-    mqtt_client.send_message("sides", [int(sides_entry.get())])
-
-
 def send_up(mqtt_client):
     print("arm_up")
     mqtt_client.send_message("arm_up")
@@ -113,9 +108,9 @@ def send_down(mqtt_client):
     mqtt_client.send_message("arm_down")
 
 
-def activate(mqtt_client):
+def activate(mqtt_client, sides_entry):
     print("Time to Feed")
-    mqtt_client.send_message("activate")
+    mqtt_client.send_message("activate", [int(sides_entry.get())])
 
 
 def deactivate(mqtt_client):

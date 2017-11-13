@@ -33,7 +33,7 @@ def main():
         if speed_deg_per_second == 0:
             break
 
-        robot.turn_degrees(turn_degrees, speed_deg_per_second)
+        robot.special_turn_degrees(turn_degrees, speed_deg_per_second)
         ev3.Sound.beep().wait()  # Fun little beep
 
     print("Goodbye!")
