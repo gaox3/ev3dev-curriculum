@@ -167,7 +167,6 @@ class Snatch3r(object):
 
     def deactivate(self):
         self.active = False
-        self.running = False
 
     def special_turn_degrees(self, degrees_to_turn, turn_speed_sp):
         if degrees_to_turn > 0:
