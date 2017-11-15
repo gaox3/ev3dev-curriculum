@@ -65,14 +65,14 @@ def main():
     back_button['command'] = lambda: back(mqtt_client, left_speed_entry, right_speed_entry)
     root.bind('<Down>', lambda event: back(mqtt_client, left_speed_entry, right_speed_entry))
 
-    left_side_label = ttk.Label(main_frame, text="Feed Me!")
+    left_side_label = ttk.Label(main_frame, text="Start!")
     left_side_label.grid(row=5, column=1)
 
-    hungry_button = ttk.Button(main_frame, text="Hungry")
+    hungry_button = ttk.Button(main_frame, text="activate")
     hungry_button.grid(row=6, column=1)
     hungry_button['command'] = lambda: activate(mqtt_client, sides_entry)
 
-    full_button = ttk.Button(main_frame, text="Full")
+    full_button = ttk.Button(main_frame, text="deactivate")
     full_button.grid(row=7, column=1)
     full_button['command'] = lambda: deactivate(mqtt_client)
 

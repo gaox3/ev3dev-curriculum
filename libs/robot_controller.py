@@ -11,6 +11,7 @@
   could be called.  That way it's a generic action that could be used in any task.
 """
 import ev3dev.ev3 as ev3
+import sys
 import time
 import math
 
@@ -166,6 +167,7 @@ class Snatch3r(object):
 
     def deactivate(self):
         self.active = False
+        self.running = False
 
     def special_turn_degrees(self, degrees_to_turn, turn_speed_sp):
         if degrees_to_turn > 0:
