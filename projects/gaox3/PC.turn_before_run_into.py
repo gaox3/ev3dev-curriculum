@@ -1,4 +1,3 @@
-
 import tkinter
 from tkinter import ttk
 import mqtt_remote_method_calls as com
@@ -28,23 +27,17 @@ def main():
     stop_button.grid(row=1, column=3)
     stop_button['command'] = lambda: stop(mqtt_client)
     root.bind('<space>', lambda event: stop(mqtt_client))
+    root.mainloop()
 
 
 def start(mqtt_client):
     print("Go!")
     mqtt_client.send_message("start")
 
+
 def stop(mqtt_client):
     print("stop")
     mqtt_client.send_message("stop")
 
 
-
-
-
-
-
-
-
 main()
-
