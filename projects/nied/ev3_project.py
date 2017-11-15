@@ -33,36 +33,37 @@ def main():
                 robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
                 robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
                 robot.drive_inches(-2, robot.SLOW_SPEED)
-                robot.turn_degrees(180, 200)
+                robot.turn_degrees(195, 200)
                 ready = True
                 while ready is True:
                     if robot.pixy.value(1) < 165:
-                        robot.special_turn_degrees(5, 200)
-                        robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
-                        robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
-                        # robot.left(robot.SLOW_SPEED, robot.SLOW_SPEED)
-                    # elif robot.pixy.value(1) > 185:
-                        # robot.right(robot.SLOW_SPEED, robot.SLOW_SPEED)
+                        # robot.special_turn_degrees(5, 200)
+                        # robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        # robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        robot.left(robot.SLOW_SPEED, robot.SLOW_SPEED)
 
                     elif robot.pixy.value(1) > 185:
-                        robot.special_turn_degrees(-5, 200)
-                        robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
-                        robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        # robot.special_turn_degrees(-5, 200)
+                        # robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        # robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        robot.right(robot.SLOW_SPEED, robot.SLOW_SPEED)
                     #     ------------------------------------------------------------------
                     elif 165 <= robot.pixy.value(1) <= 185:
+                        robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
+                        robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
                         if 100 > robot.ir_sensor.proximity:
                             # if distance is None:
                             #     distance = robot.ir_sensor.proximity
                             robot.forward(300, 300)
-                            if robot.ir_sensor.proximity < 1.5 or robot.ir_sensor.proximity == 100:
+                            if robot.ir_sensor.proximity <= 1.5 or robot.ir_sensor.proximity == 100:
                                 robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
                                 robot.right_motor.stop(stop_action=ev3.Motor.STOP_ACTION_COAST)
                                 robot.arm_up()
-                                if robot.ir_sensor.proximity <= 4:
-                                    robot.turn_degrees(200, robot.MAX_SPEED)
+                                if robot.ir_sensor.proximity <= 4 or robot.ir_sensor.proximity == 100:
+                                    robot.turn_degrees(195, robot.MAX_SPEED)
                                     search_line = True
                                     while search_line is True:
-                                        robot.forward(180, 200)
+                                        robot.forward(300, 300)
                                         if robot.color_sensor.reflected_light_intensity > 15:
                                             search_line = False
                                     robot.left_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
@@ -70,9 +71,10 @@ def main():
                                     # robot.drive_inches(distance * 0.27559, 300)
                                     robot.arm_down()
                                     robot.drive_inches(-3, robot.SLOW_SPEED)
-                                    robot.turn_degrees(-robot.degrees_turned, 200)
-                                    robot.degrees_turned = 0
-                                    robot.turn_degrees((360 / robot.sides), 200)
+                                    # robot.turn_degrees(-robot.degrees_turned, 200)
+                                    # robot.degrees_turned = 0
+                                    robot.turn_degrees(199, 200)
+                                    robot.turn_degrees(-((360 / robot.sides)/2), 200)
                                     ready = False
                                 else:
                                     robot.arm_down()
