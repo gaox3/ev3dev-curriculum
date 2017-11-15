@@ -33,12 +33,12 @@ def main():
 
 def start(mqtt_client):
     print("Go!")
-    mqtt_client.send_message("start")
+    mqtt_client.send_message("activate", [1])
 
 
 def stop(mqtt_client):
     print("stop")
-    mqtt_client.send_message("stop")
+    mqtt_client.send_message("deactivate")
 
 
 main()
