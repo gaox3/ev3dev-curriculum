@@ -38,7 +38,7 @@ def start(mqtt_client):
 
 def stop(mqtt_client):
     print("stop")
-    mqtt_client.send_message("stop")
+    mqtt_client.send_message("deactivate")
 
 
 main()
